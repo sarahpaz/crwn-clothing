@@ -13,6 +13,12 @@ const config = {
   measurementId: "G-8V4BYL5YV1"
 };
 
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  if (!userAuth) return; //* userAuth evalutes null (false) -> reverse it (check if userAuth object does not exist return from function / exit from function)
+
+  console.log(firestore.doc("users/12318461"));
+};
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
