@@ -13,14 +13,14 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      currentUser: null
+      currentUser: null,
     };
   }
 
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
       createUserProfileDocument(user);
     });
   }

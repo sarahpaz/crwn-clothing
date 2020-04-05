@@ -9,14 +9,17 @@ const config = {
   projectId: "crwn-db-afcef",
   storageBucket: "crwn-db-afcef.appspot.com",
   messagingSenderId: "469412315886",
-  appId: "1:469412315886:web:194248356e86455bbf69ff",
-  measurementId: "G-8V4BYL5YV1"
+  appId: "1:469412315886:web:19424835 6e86455bbf69ff",
+  measurementId: "G-8V4BYL5YV1",
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
-  if (!userAuth) return; //* userAuth evalutes null (false) -> reverse it (check if userAuth object does not exist return from function / exit from function)
+  if (!userAuth) return; //* userAuth evaluates null (false) -> reverse it (check if userAuth object does not exist return from function / exit from function)
 
-  console.log(firestore.doc("users/12318461"));
+  const userRef = firestore.doc(`users/%{userAuth.uid}`);
+  const snapshot = await userRef.get();
+
+  console.log(snapshot);
 };
 
 firebase.initializeApp(config);
