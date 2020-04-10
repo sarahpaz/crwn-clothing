@@ -26,7 +26,8 @@ class App extends React.Component {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot((snapShot) => {
-          console.log(snapShot.data()); // data includes all the data in our db
+          console.log(snapShot.data());
+          // data includes all the data in our db -> we do not get any data without using .data()
           this.setState(
             {
               currentUser: {
@@ -40,7 +41,7 @@ class App extends React.Component {
           );
         });
       } else {
-        this.setState({ currentUser: userAuth });
+        this.setState({ currentUser: userAuth }); // userAuth is null -> this is equivalent to currentUser: null
       }
     });
   }

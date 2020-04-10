@@ -15,30 +15,30 @@ const config = {
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
-	if(!userAuth) return
-	
-	const userRef = firestore.doc(`users/${userAuth.uid}`)
-	
-	const snapShot = await userRef.get()
+  if (!userAuth) return; // if it's not false -> if the userAuth object does not exist exit from the function
 
-	if(!snapShot.exists)  {
-		const {displayName, email} = userAuth
-		const createdAt = new Date()
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
 
-		try {
-			await userRef.set({
-				displayName, 
-				email,
-				createdAt,
-				...additionalData
-			})
+  const snapShot = await userRef.get();
 
-		} catch(error) {
-			console.log('error creating user', error.message)
-		}
-	}
-	return userRef
-}
+  if (!snapShot.exists) {
+    // if the snapShot doesn't exist, create a new user using the data from the userAuth object
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        createdAt,
+        ...additionalData,
+      });
+    } catch (error) {
+      console.log("error creating user", error.message);
+    }
+  }
+  return userRef;
+};
 
 firebase.initializeApp(config);
 
